@@ -28,3 +28,31 @@ body {
 .weather-display {
   display: inline-block;
 }
+
+.temperature,
+.description,
+.humidity {
+  padding: 5px;
+}
+
+button {
+  background-color: lightblue;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  height: 40px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.zip-code-input {
+  border-radius: 10px;
+  height: 35px;
+  border: 1px solid white;
+}
+
+#error {
+  color: red;
+}

@@ -63,3 +63,17 @@ const getWeather = (zipcode) => {
       showWeather(response);
     });
 };
+
+const showWeather = (response) => {
+  let { name } = response;
+  let { description, icon } = response.weather[0];
+  let { temp, humidity } = response.main;
+  console.log(name, description, temp, humidity, icon);
+  document.querySelector('.city').innerText = `Weather in ${name}:`;
+  document.querySelector('.temperature').innerText = `Temperature: ${temp}°`;
+  document.querySelector('.description').innerText = description;
+  document.querySelector('.humidity').innerText = `Humidity: ${humidity}%`;
+  document.querySelector(
+    '.weather-symbol'
+  ).src = `http://openweathermap.org/img/w/${icon}.png`;
+};
