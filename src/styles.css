@@ -1,0 +1,30 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-image: url('../assets/billy-huynh-v9bnfMCyKbg-unsplash.jpg');
+  background-position: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.weather-card {
+  height: 400px;
+  width: 400px;
+  background-color: rgb(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  flex-direction: column;
+  color: white;
+}
+
+.weather-card:hover {
+  box-shadow: 5px 20px 20px white;
+}
+
+.weather-display {
+  display: inline-block;
+}

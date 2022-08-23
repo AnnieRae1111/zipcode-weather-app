@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../src/styles.css" rel="stylesheet"/>
+  <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="weather-card">
+    <div class="zip-code">
+      <input class='zip-code-input' name="zipcode" id="zipcode" type="text" placeholder="Enter zip code" onkeyup="validateZip()"/>
+      <button class="submit-button" type="submit" >Get Weather</button>
+      <p id="error" class="error hide"></p>
+    </div>
+    <div class="weather-display">
+      <h1 class="city">Weather in London:</h1>
+      <img src="" alt="" class="weather-symbol"/>
+      <div class="temperature">Temperature: 60°</div>
+      <div class="description">Cloudy Skies</div>
+      <div class="humidity"> Humidity:70%</div>
+    </div>
+  </div>
+ <script src="../config.js"></script>
+ <script src="../src/script.js"></script>
+</body>
+
+</html>
