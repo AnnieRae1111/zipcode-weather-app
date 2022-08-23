@@ -26,3 +26,40 @@ const validateZip = () => {
     alert.style.display = 'none';
   }
 };
+
+submitButton.addEventListener('click', () => {
+  zipcode = getZipCode();
+  console.log(zipcode, 'zipcode');
+  validateZip(zipcode);
+  getWeather(zipcode);
+});
+
+const getWeather = (zipcode) => {
+  fetch(
+    `https://api.openweathermap.org/geo/1.0/zip?zip=${zipcode},US&appid=53975abcd303342b07e6117aaeebfc05`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Status code error:${response.status}`);
+      } else {
+        return response.json();
+      }
+    })
+    .then((data) => {
+      console.log(data, 'openweather data');
+      lat = data.lat;
+      long = data.lon;
+      console.log('lat', lat);
+      console.log('long', long);
+      return fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${openWeatherApiKey}&units=imperial`
+      );
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      console.log(response, 'weather info');
+      showWeather(response);
+    });
+};
