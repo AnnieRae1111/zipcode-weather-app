@@ -62,8 +62,6 @@ const getWeather = (zipcode) => {
       console.log(data, 'openweather data');
       lat = data.lat;
       long = data.lon;
-      console.log('lat', lat);
-      console.log('long', long);
       return fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${ApiKey}&units=imperial`
       );
