@@ -75,3 +75,12 @@ button:hover {
   color: red;
   padding: none;
 }
+
+/* mobile */
+
+@media only screen and (max-width: 500px) {
+  .weather-card {
+    height: 390px;
+    width: 390px;
+  }
+}
