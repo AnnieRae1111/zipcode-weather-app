@@ -32,7 +32,6 @@ img {
   width: 70px;
 }
 .weather-display {
-  /* display: inline-block; */
   display: flex;
   flex-direction: column;
   padding-left: 2rem;
