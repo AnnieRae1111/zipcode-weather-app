@@ -1,4 +1,4 @@
-const openWeatherApiKey = config.API_KEY;
+const ApiKey = config.API_KEY;
 
 let lat;
 let long;
@@ -34,6 +34,17 @@ submitButton.addEventListener('click', () => {
   getWeather(zipcode);
 });
 
+const checkStatusAndAlert = (response) => {
+  let notValid = document.getElementById('ziperror');
+  if (!response.ok || response.status === 404) {
+    notValid.innerHTML = 'Zip code entered is not a valid zip code';
+    throw new Error(`Status code error:${response.status}`);
+  } else {
+    notValid.innerHTML = '';
+    return response.json();
+  }
+};
+
 const checkStatus = (response) => {
   if (!response.ok) {
     throw new Error(`Status code error:${response.status}`);
@@ -44,9 +55,9 @@ const checkStatus = (response) => {
 
 const getWeather = (zipcode) => {
   fetch(
-    `https://api.openweathermap.org/geo/1.0/zip?zip=${zipcode},US&appid=53975abcd303342b07e6117aaeebfc05`
+    `https://api.openweathermap.org/geo/1.0/zip?zip=${zipcode},US&appid=${ApiKey}`
   )
-    .then(checkStatus)
+    .then(checkStatusAndAlert)
     .then((data) => {
       console.log(data, 'openweather data');
       lat = data.lat;
@@ -54,26 +65,26 @@ const getWeather = (zipcode) => {
       console.log('lat', lat);
       console.log('long', long);
       return fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${openWeatherApiKey}&units=imperial`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${ApiKey}&units=imperial`
       );
     })
-    .then((response) => {
-      return response.json();
-    })
-    .then((response) => {
-      console.log(response, 'weather info');
-      showWeather(response);
+    .then(checkStatus)
+    .then((data) => {
+      console.log(data, 'weather info');
+      showWeather(data);
     });
 };
 
-const showWeather = (response) => {
-  let { name } = response;
-  let { description, icon } = response.weather[0];
-  let { temp, humidity } = response.main;
+const showWeather = (data) => {
+  let { name } = data;
+  let { description, icon } = data.weather[0];
+  let { temp, humidity } = data.main;
   console.log(name, description, temp, humidity, icon);
   document.querySelector('.city').innerText = `Weather in ${name}:`;
   document.querySelector('.temperature').innerText = `Temperature: ${temp}°`;
-  document.querySelector('.description').innerText = description;
+  document.querySelector(
+    '.description'
+  ).innerText = `Today's Forecast: ${description}`;
   document.querySelector('.humidity').innerText = `Humidity: ${humidity}%`;
   document.querySelector(
     '.weather-symbol'
