@@ -7,7 +7,14 @@ let zipcode;
 //check that zipcode is valid
 let regex = /^(\d{5})?$/;
 let error = document.querySelector('.error');
+
 let submitButton = document.querySelector('.submit-button');
+submitButton.addEventListener('click', () => {
+  zipcode = getZipCode();
+  console.log(zipcode, 'zipcode');
+  validateZip(zipcode);
+  getWeather(zipcode);
+});
 
 const getZipCode = () => {
   let zipcode = document.querySelector('input').value;
@@ -26,13 +33,6 @@ const validateZip = () => {
     alert.style.display = 'none';
   }
 };
-
-submitButton.addEventListener('click', () => {
-  zipcode = getZipCode();
-  console.log(zipcode, 'zipcode');
-  validateZip(zipcode);
-  getWeather(zipcode);
-});
 
 const checkStatusAndAlert = (response) => {
   let notValid = document.getElementById('ziperror');
@@ -72,6 +72,9 @@ const getWeather = (zipcode) => {
     .then((data) => {
       console.log(data, 'weather info');
       showWeather(data);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 
