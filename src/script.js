@@ -34,17 +34,19 @@ submitButton.addEventListener('click', () => {
   getWeather(zipcode);
 });
 
+const checkStatus = (response) => {
+  if (!response.ok) {
+    throw new Error(`Status code error:${response.status}`);
+  } else {
+    return response.json();
+  }
+};
+
 const getWeather = (zipcode) => {
   fetch(
     `https://api.openweathermap.org/geo/1.0/zip?zip=${zipcode},US&appid=53975abcd303342b07e6117aaeebfc05`
   )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Status code error:${response.status}`);
-      } else {
-        return response.json();
-      }
-    })
+    .then(checkStatus)
     .then((data) => {
       console.log(data, 'openweather data');
       lat = data.lat;
