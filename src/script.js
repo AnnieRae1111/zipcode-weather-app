@@ -18,8 +18,6 @@ submitButton.addEventListener('click', () => {
 
 const getZipCode = () => {
   let zipcode = document.querySelector('input').value;
-  console.log(zipcode, 'zipcode');
-  console.log(zipcode.length);
   return zipcode;
 };
 
@@ -45,14 +43,6 @@ const checkStatusAndAlert = (response) => {
   }
 };
 
-const checkStatus = (response) => {
-  if (!response.ok) {
-    throw new Error(`Status code error:${response.status}`);
-  } else {
-    return response.json();
-  }
-};
-
 const getWeather = (zipcode) => {
   fetch(
     `https://api.openweathermap.org/geo/1.0/zip?zip=${zipcode},US&appid=${ApiKey}`
@@ -66,7 +56,7 @@ const getWeather = (zipcode) => {
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${ApiKey}&units=imperial`
       );
     })
-    .then(checkStatus)
+    .then(checkStatusAndAlert)
     .then((data) => {
       console.log(data, 'weather info');
       showWeather(data);
