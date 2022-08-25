@@ -11,7 +11,6 @@ let error = document.querySelector('.error');
 let submitButton = document.querySelector('.submit-button');
 submitButton.addEventListener('click', () => {
   zipcode = getZipCode();
-  console.log(zipcode, 'zipcode');
   validateZip(zipcode);
   getWeather(zipcode);
 });
@@ -58,7 +57,6 @@ const getWeather = (zipcode) => {
     })
     .then(checkStatusAndAlert)
     .then((data) => {
-      console.log(data, 'weather info');
       showWeather(data);
     })
     .catch((err) => {
